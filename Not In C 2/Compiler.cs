@@ -152,6 +152,7 @@ namespace Not_In_C_2
             else if (t == "pause") return true;
             else if (t == "clear") return true;
             else if (t == "goto") return true;
+            else if (t == "comp") return true;
             else if (t == "if") return true;
             else if (t == "{") return true;
             else if (t == "}") return true;

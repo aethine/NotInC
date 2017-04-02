@@ -150,21 +150,77 @@ namespace Not_In_C_2
             }
             else if (words[0] == "set")
             {
-                if (test(1, "Must have variable name to set") && test(2, "Must have variable to set to"))
+                if (test(1, "Must have variable name to set") && test(2, "Must have value to set to"))
                 {
                     Memory.type T = Memory.VGet(words[1]);
                     try
                     {
                         if (T == Memory.type.Int) { var d = new DataTable(); Memory.ISet(words[1], int.Parse(d.Compute(getAllAfter(1), "").ToString())); }
-                        else if (T == Memory.type.Bool) Memory.BSet(words[1], bool.Parse(words[2]));
+                        else if (T == Memory.type.Bool) { Memory.BSet(words[1], bool.Parse(getAllAfter(1))); }
                         else if (T == Memory.type.String) Memory.SSet(words[1], getAllAfter(1));
                         else if (T == Memory.type.Double) { var d = new DataTable(); Memory.DSet(words[1], double.Parse(d.Compute(getAllAfter(1), "").ToString())); }
                     }
                     catch (FormatException) { Error("Set types in variable and new value do not match"); }
                 }
             }
+            else if (words[0] == "comp")
+            {
+                if (test(1, "Need i for integer/double or b for boolean comparison") && test(2, "Missing first compare element") && test(3, "Missing compare operator") && test(4, "Missing second compare element") && test(5, "Missing variable to output to"))
+                {
+                    if (words[1] == "i")
+                    {
+                        string sd1 = words[2], sd2 = words[4];
+                        if (sd1.StartsWith("@")) sd1 = expand(sd1);
+                        if (sd2.StartsWith("@")) sd2 = expand(sd2);
+                        string oper = words[3], outname = words[5];
+                        double d1, d2;
+                        if (double.TryParse(sd1, out d1) && double.TryParse(sd2, out d2))
+                        {
+                            if (oper.isIComp())
+                            {
+                                if(Memory.VGet(outname) == Memory.type.Bool)
+                                { //if everything is correct
+                                    if (oper == "eq") Memory.BSet(outname, d1 == d2);
+                                    else if (oper == "ls") Memory.BSet(outname, d1 < d2);
+                                    else if (oper == "gr") Memory.BSet(outname, d1 > d2);
+                                    else if (oper == "ne") Memory.BSet(outname, d1 != d2);
+                                    else if (oper == "lq") Memory.BSet(outname, d1 <= d2);
+                                    else if (oper == "gq") Memory.BSet(outname, d1 >= d2);
+                                }
+                            }
+                            else Error("Expected an integer comparison");
+                        }
+                        else Error("Expected an integer or double for comparison");
+                    }
+                    else if (words[1] == "b")
+                    {
+                        bool b1, b2;
+                    }
+                    else Error("Need i for integer/double or b for boolean comparison");
+                }
+            }
             else if (Memory.VGet(words[0]) == Memory.type.Function) { execFunction(words[0]); }
             else throw new Exception();
+        }
+        static bool isIComp(this string t)
+        {
+            if (t == "eq") return true;
+            else if (t == "ls") return true;
+            else if (t == "gr") return true;
+            else if (t == "ne") return true;
+            else if (t == "lq") return true;
+            else if (t == "gq") return true;
+            else return false;
+        }
+        static bool isBComp(this string t)
+        {
+            if (t == "or") return true;
+            else if (t == "nor") return true;
+            else if (t == "and") return true;
+            else if (t == "nand") return true;
+            else if (t == "xor") return true;
+            else if (t == "xnor") return true;
+            else return false;
         }
     }
 }
