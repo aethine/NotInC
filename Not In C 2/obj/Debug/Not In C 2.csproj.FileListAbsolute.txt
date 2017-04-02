@@ -1,0 +1,8 @@
+/Volumes/Users/Kaleb/Documents/Visual Studio 2015/Projects/Not In C 2/Not In C 2/obj/Debug/Not In C 2.csprojResolveAssemblyReference.cache
+/Volumes/Users/Kaleb/Documents/Visual Studio 2015/Projects/Not In C 2/Not In C 2/obj/Debug/Not In C 2.exe
+C:\Users\Kaleb\Documents\Visual Studio 2015\Projects\Not In C 2\Not In C 2\bin\Debug\Not In C 2.exe.config
+C:\Users\Kaleb\Documents\Visual Studio 2015\Projects\Not In C 2\Not In C 2\obj\Debug\Not In C 2.exe
+C:\Users\Kaleb\Documents\Visual Studio 2015\Projects\Not In C 2\Not In C 2\obj\Debug\Not In C 2.pdb
+C:\Users\Kaleb\Documents\Visual Studio 2015\Projects\Not In C 2\Not In C 2\bin\Debug\Not In C 2.exe
+C:\Users\Kaleb\Documents\Visual Studio 2015\Projects\Not In C 2\Not In C 2\bin\Debug\Not In C 2.pdb
+C:\Users\Kaleb\Documents\Visual Studio 2015\Projects\Not In C 2\Not In C 2\obj\Debug\Not In C 2.csprojResolveAssemblyReference.cache
