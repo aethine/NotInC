@@ -194,7 +194,28 @@ namespace Not_In_C_2
                     }
                     else if (words[1] == "b")
                     {
+                        string sb1 = words[2], sb2 = words[4];
+                        if (sb1.StartsWith("@")) sb1 = expand(sb1);
+                        if (sb2.StartsWith("@")) sb2 = expand(sb2);
+                        string oper = words[3], outname = words[5];
                         bool b1, b2;
+                        if (bool.TryParse(sb1, out b1) && bool.TryParse(sb2, out b2))
+                        {
+                            if (oper.isBComp())
+                            {
+                                if (Memory.VGet(outname) == Memory.type.Bool)
+                                { //if everything is correct
+                                    if (oper == "or") Memory.BSet(outname, b1 | b2);
+                                    else if (oper == "nor") Memory.BSet(outname, !(b1 | b2));
+                                    else if (oper == "and") Memory.BSet(outname, b1 & b2);
+                                    else if (oper == "ne") Memory.BSet(outname, !(b1 & b2));
+                                    else if (oper == "lq") Memory.BSet(outname, b1 ^ b2);
+                                    else if (oper == "gq") Memory.BSet(outname, !(b1 ^ b2));
+                                }
+                            }
+                            else Error("Expected an integer comparison");
+                        }
+                        else Error("Expected an integer or double for comparison");
                     }
                     else Error("Need i for integer/double or b for boolean comparison");
                 }
