@@ -165,71 +165,77 @@ namespace Not_In_C_2
             }
             else if (words[0] == "comp")
             {
-                if (test(1, "Need i for integer/double, b for boolean comparison or s for string comparison") && test(2, "Missing first compare element") && test(3, "Missing compare operator") && test(4, "Missing second compare element") && test(5, "Missing variable to output to"))
+                if (words[1] == "i")
                 {
-                    if (words[1] == "i")
+                    test(2, "Missing first compare element"); test(3, "Missing compare operator"); test(4, "Missing second compare element"); test(5, "Missing variable to output to");
+                    string sd1 = words[2], sd2 = words[4];
+                    if (sd1.StartsWith("@")) sd1 = expand(sd1);
+                    if (sd2.StartsWith("@")) sd2 = expand(sd2);
+                    string oper = words[3], outname = words[5];
+                    double d1, d2;
+                    if (double.TryParse(sd1, out d1) && double.TryParse(sd2, out d2))
                     {
-                        string sd1 = words[2], sd2 = words[4];
-                        if (sd1.StartsWith("@")) sd1 = expand(sd1);
-                        if (sd2.StartsWith("@")) sd2 = expand(sd2);
-                        string oper = words[3], outname = words[5];
-                        double d1, d2;
-                        if (double.TryParse(sd1, out d1) && double.TryParse(sd2, out d2))
+                        if (oper.isIComp())
                         {
-                            if (oper.isIComp())
-                            {
-                                if(Memory.VGet(outname) == Memory.type.Bool)
-                                { //if everything is correct
-                                    if (oper == "eq") Memory.BSet(outname, d1 == d2);
-                                    else if (oper == "ls") Memory.BSet(outname, d1 < d2);
-                                    else if (oper == "gr") Memory.BSet(outname, d1 > d2);
-                                    else if (oper == "ne") Memory.BSet(outname, d1 != d2);
-                                    else if (oper == "lq") Memory.BSet(outname, d1 <= d2);
-                                    else if (oper == "gq") Memory.BSet(outname, d1 >= d2);
-                                }
+                            if (Memory.VGet(outname) == Memory.type.Bool)
+                            { //if everything is correct
+                                if (oper == "eq") Memory.BSet(outname, d1 == d2);
+                                else if (oper == "ls") Memory.BSet(outname, d1 < d2);
+                                else if (oper == "gr") Memory.BSet(outname, d1 > d2);
+                                else if (oper == "ne") Memory.BSet(outname, d1 != d2);
+                                else if (oper == "lq") Memory.BSet(outname, d1 <= d2);
+                                else if (oper == "gq") Memory.BSet(outname, d1 >= d2);
                             }
-                            else Error("Expected an integer comparison");
                         }
-                        else Error("Expected an integer or double for comparison");
+                        else Error("Expected an integer comparison operator");
                     }
-                    else if (words[1] == "b")
-                    {
-                        string sb1 = words[2], sb2 = words[4];
-                        if (sb1.StartsWith("@")) sb1 = expand(sb1);
-                        if (sb2.StartsWith("@")) sb2 = expand(sb2);
-                        string oper = words[3], outname = words[5];
-                        bool b1, b2;
-                        if (bool.TryParse(sb1, out b1) && bool.TryParse(sb2, out b2))
-                        {
-                            if (oper.isBComp())
-                            {
-                                if (Memory.VGet(outname) == Memory.type.Bool)
-                                { //if everything is correct
-                                    if (oper == "or") Memory.BSet(outname, b1 | b2);
-                                    else if (oper == "nor") Memory.BSet(outname, !(b1 | b2));
-                                    else if (oper == "and") Memory.BSet(outname, b1 & b2);
-                                    else if (oper == "nand") Memory.BSet(outname, !(b1 & b2));
-                                    else if (oper == "xor") Memory.BSet(outname, b1 ^ b2);
-                                    else if (oper == "xnor") Memory.BSet(outname, !(b1 ^ b2));
-                                }
-                            }
-                            else Error("Expected a boolean operator");
-                        }
-                        else Error("Expected a boolean for comparison");
-                    }
-                    else if (words[1] == "s")
-                    {
-                        if(test(2, "First string for comparison not found") && test(3, "Second string for comparison not found") && test(4, "Boolean name for output not found"))
-                        {
-                            Memory.BSet(words[4], words[2] == words[3]); 
-                        }
-                    }
-                    else Error("Expected i for integer/double, b for boolean comparison or s for string comparison");
+                    else Error("Expected an integer or double for comparison");
                 }
+                else if (words[1] == "b")
+                {
+                    test(2, "Missing first compare element"); test(3, "Missing compare operator"); test(4, "Missing second compare element"); test(5, "Missing variable to output to");
+                    string sb1 = words[2], sb2 = words[4];
+                    if (sb1.StartsWith("@")) sb1 = expand(sb1);
+                    if (sb2.StartsWith("@")) sb2 = expand(sb2);
+                    string oper = words[3], outname = words[5];
+                    bool b1, b2;
+                    if (bool.TryParse(sb1, out b1) && bool.TryParse(sb2, out b2))
+                    {
+                        if (oper.isBComp())
+                        {
+                            if (Memory.VGet(outname) == Memory.type.Bool)
+                            { //if everything is correct
+                                if (oper == "or") Memory.BSet(outname, b1 | b2);
+                                else if (oper == "nor") Memory.BSet(outname, !(b1 | b2));
+                                else if (oper == "and") Memory.BSet(outname, b1 & b2);
+                                else if (oper == "nand") Memory.BSet(outname, !(b1 & b2));
+                                else if (oper == "xor") Memory.BSet(outname, b1 ^ b2);
+                                else if (oper == "xnor") Memory.BSet(outname, !(b1 ^ b2));
+                            }
+                        }
+                        else Error("Expected a boolean operator");
+                    }
+                    else Error("Expected a boolean for comparison");
+                }
+                else if (words[1] == "s")
+                {
+                    if (test(2, "First string for comparison not found") && test(3, "Second string for comparison not found") && test(4, "Boolean name for output not found"))
+                    {
+                        Memory.BSet(words[4], words[2] == words[3]);
+                    }
+                }
+                else Error("Expected i for integer/double, b for boolean comparison or s for string comparison");
             }
             else if (words[0] == "scan")
-                if(test(1, "Must have string variable to scan to"))
+            {
+                if (test(1, "Must have string variable to scan to"))
                     Memory.SSet(words[1], Console.ReadLine());
+            }
+            else if (words[0] == "flip")
+            {
+                if (test(1, "Must have boolean variable to scan to"))
+                    Memory.BSet(words[1], !Memory.BGet(words[1]));
+            }
             else if (Memory.VGet(words[0]) == Memory.type.Function) { execFunction(words[0]); }
             else throw new Exception();
         }
