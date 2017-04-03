@@ -165,7 +165,7 @@ namespace Not_In_C_2
             }
             else if (words[0] == "comp")
             {
-                if (test(1, "Need i for integer/double or b for boolean comparison") && test(2, "Missing first compare element") && test(3, "Missing compare operator") && test(4, "Missing second compare element") && test(5, "Missing variable to output to"))
+                if (test(1, "Need i for integer/double, b for boolean comparison or s for string comparison") && test(2, "Missing first compare element") && test(3, "Missing compare operator") && test(4, "Missing second compare element") && test(5, "Missing variable to output to"))
                 {
                     if (words[1] == "i")
                     {
@@ -208,16 +208,23 @@ namespace Not_In_C_2
                                     if (oper == "or") Memory.BSet(outname, b1 | b2);
                                     else if (oper == "nor") Memory.BSet(outname, !(b1 | b2));
                                     else if (oper == "and") Memory.BSet(outname, b1 & b2);
-                                    else if (oper == "ne") Memory.BSet(outname, !(b1 & b2));
-                                    else if (oper == "lq") Memory.BSet(outname, b1 ^ b2);
-                                    else if (oper == "gq") Memory.BSet(outname, !(b1 ^ b2));
+                                    else if (oper == "nand") Memory.BSet(outname, !(b1 & b2));
+                                    else if (oper == "xor") Memory.BSet(outname, b1 ^ b2);
+                                    else if (oper == "xnor") Memory.BSet(outname, !(b1 ^ b2));
                                 }
                             }
-                            else Error("Expected an integer comparison");
+                            else Error("Expected a boolean operator");
                         }
-                        else Error("Expected an integer or double for comparison");
+                        else Error("Expected a boolean for comparison");
                     }
-                    else Error("Need i for integer/double or b for boolean comparison");
+                    else if (words[1] == "s")
+                    {
+                        if(test(2, "First string for comparison not found") && test(3, "Second string for comparison not found") && test(4, "Boolean name for output not found"))
+                        {
+                            Memory.BSet(words[4], words[2] == words[3]); 
+                        }
+                    }
+                    else Error("Need i for integer/double, b for boolean comparison or s for string comparison");
                 }
             }
             else if (words[0] == "scan")
