@@ -224,7 +224,7 @@ namespace Not_In_C_2
                             Memory.BSet(words[4], words[2] == words[3]); 
                         }
                     }
-                    else Error("Need i for integer/double, b for boolean comparison or s for string comparison");
+                    else Error("Expected i for integer/double, b for boolean comparison or s for string comparison");
                 }
             }
             else if (words[0] == "scan")
