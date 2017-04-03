@@ -220,6 +220,9 @@ namespace Not_In_C_2
                     else Error("Need i for integer/double or b for boolean comparison");
                 }
             }
+            else if (words[0] == "scan")
+                if(test(1, "Must have string variable to scan to"))
+                    Memory.SSet(words[1], Console.ReadLine());
             else if (Memory.VGet(words[0]) == Memory.type.Function) { execFunction(words[0]); }
             else throw new Exception();
         }

@@ -6,3 +6,9 @@ C:\Users\Kaleb\Documents\Visual Studio 2015\Projects\Not In C 2\Not In C 2\obj\D
 C:\Users\Kaleb\Documents\Visual Studio 2015\Projects\Not In C 2\Not In C 2\bin\Debug\Not In C 2.exe
 C:\Users\Kaleb\Documents\Visual Studio 2015\Projects\Not In C 2\Not In C 2\bin\Debug\Not In C 2.pdb
 C:\Users\Kaleb\Documents\Visual Studio 2015\Projects\Not In C 2\Not In C 2\obj\Debug\Not In C 2.csprojResolveAssemblyReference.cache
+\\Mac\Home\Documents\Visual Studio 2017\Projects\NotInC\Not In C 2\bin\Debug\Not In C 2.exe.config
+\\Mac\Home\Documents\Visual Studio 2017\Projects\NotInC\Not In C 2\bin\Debug\Not In C 2.exe
+\\Mac\Home\Documents\Visual Studio 2017\Projects\NotInC\Not In C 2\bin\Debug\Not In C 2.pdb
+\\Mac\Home\Documents\Visual Studio 2017\Projects\NotInC\Not In C 2\obj\Debug\Not In C 2.csprojResolveAssemblyReference.cache
+\\Mac\Home\Documents\Visual Studio 2017\Projects\NotInC\Not In C 2\obj\Debug\Not In C 2.exe
+\\Mac\Home\Documents\Visual Studio 2017\Projects\NotInC\Not In C 2\obj\Debug\Not In C 2.pdb
